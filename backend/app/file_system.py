@@ -95,8 +95,8 @@ class AudioFS:
         """
         path = os.path.join(user_audio_dir, '%s-skipped.txt' % uuid)
         data = "{}\n".format(prompt.lstrip('___SKIPPED___'))
-
-        with open(path, 'a') as f:
+        os.makedirs(user_audio_dir)
+        with open(path, 'a+') as f:
             f.write(data)
 
 
