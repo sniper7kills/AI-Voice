@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask.views import MethodView
 from flask_cors import CORS
-from .api import UserAPI, PromptAPI, AudioAPI
+from .api import UserAPI, PromptAPI, AudioAPI, LJSpeechAPI
 
 app = Flask(__name__)
 CORS(app)
@@ -9,6 +9,7 @@ CORS(app)
 user_api = UserAPI()
 audio_api = AudioAPI()
 prompt_api = PromptAPI()
+ljspeech_api = LJSpeechAPI()
 
 
 class Users(MethodView):
@@ -87,6 +88,16 @@ class Prompts(MethodView):
         else:
             return jsonify(success=False, messsage="failed to get prompt")
 
+class LJSpeech(MethodView):
+    def post(self):
+        uuid = request.get_json(force=True)['uuid']
+        result = ljspeech_api.convert(uuid)
+        return jsonify(success=result.success)
+
+    def get(self):
+        uuid = request.args.get('uuid')
+        return send_from_directory('/src/LJSpeech', '%s.tar.gz' % uuid, as_attachment=True)
+
 
 # registering apis
 user_view = Users.as_view('user')
@@ -108,4 +119,11 @@ app.add_url_rule(
     '/api/prompt/',
     view_func=prompt_view,
     methods=['GET']
+)
+
+ljspeech_view = LJSpeech.as_view('ljspeech')
+app.add_url_rule(
+    '/api/ljspeech/',
+    view_func=ljspeech_view,
+    methods=['GET', 'POST']
 )

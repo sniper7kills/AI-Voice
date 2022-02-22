@@ -8,8 +8,9 @@ class Header extends Component {
     return (
       <div className="topnav">
         <Link to="/">
-          <img className="logo" src={logo} height="24px" alt=""/>
+          <img className="logo" src={logo} height="100%" alt=""/>
         </Link>
+        <a style={{"color": "#FFFFFF"}} href="https://github.com/MycroftAI/mimic-recording-studio">Mimic Recording Studio</a>
       </div>
     );
   }

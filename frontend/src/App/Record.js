@@ -3,6 +3,7 @@ import { ReactMic as Visualizer } from "react-mic";
 import Recorder from "./components/Recorder";
 import PhraseBox from "./components/PhraseBox";
 import Metrics from "./components/Metrics";
+import Actions from "./components/Actions";
 import hark from "hark";
 import Wave from "./components/Wave";
 
@@ -50,7 +51,6 @@ class Record extends Component {
   render() {
     return (
       <div id="PageRecord">
-        <h1>Mimic Recording Studio</h1>
         <TopContainer
           userName={this.name}
           route={this.props.history.push}
@@ -118,6 +118,7 @@ class Record extends Component {
             Next
           </a>
         </div>
+        <Actions></Actions>
       </div>
     );
   }

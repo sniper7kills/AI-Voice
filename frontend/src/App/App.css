@@ -92,8 +92,8 @@ hr {
 }
 
 .topnav {
-  height: 64px;
-  background-color: #22a7f0;
+  height: 116px;
+  background-color: #374151;
   color: white;
   font-weight: 400;
   font-size: 18px;
@@ -106,11 +106,11 @@ hr {
 }
 
 .top-container {  
-  display: flex;
+  display: inline-block;
   justify-content: center;
   flex-wrap: wrap;
   position: absolute;
-  top: 64px;
+  top: 115px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -209,6 +209,21 @@ hr {
   justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 10px;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+
+.actions-container div {
+  margin: 0px 0px 0px 0px;
+  padding: 20px 50px 20px 50px;
+  background-color: #f1f3f4;
+  border-radius: 6px;
+  flex: 1;
 }
 
 .total-hours {
@@ -666,4 +681,8 @@ canvas {
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+.hidden {
+  display: none
 }

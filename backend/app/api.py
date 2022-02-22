@@ -158,3 +158,26 @@ class PromptAPI:
                 return response(True, data=res.data)
 
         return response(False)
+
+# TODO: make this nice
+class LJSpeechAPI:
+    """API to get LJSpeech output"""
+
+    def convert(self, uuid: str) -> response:
+        """Launch the conversion process
+
+        Args:
+            uuid (str): Unique ID of user.
+
+        Returns:
+            response: Response object containing success or failure as bool.
+                      If successful, next phrase to be recorded provided as data object.
+        """
+        try:
+            import subprocess
+            subprocess.run(['python', '/src/app/ljspeech.py', '--mrs_dir', '/src', '--user_id', uuid])
+            subprocess.run(['tar', '-czf', '/src/LJSpeech/%s.tar.gz' % uuid, '-C', '/src/LJSpeech/', uuid])
+            subprocess.run(['rm', '-rf', '/src/LJSpeech/%s' % uuid])
+        except:
+            return response(False)
+        return response(True)
